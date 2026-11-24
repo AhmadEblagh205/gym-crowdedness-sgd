@@ -1,0 +1,66 @@
+{
+  "n_worlds": 100,
+  "second_harmonic": {
+    "fraction_improved": 1.0,
+    "n_improved": 100,
+    "r2_gain": {
+      "median": 0.3634,
+      "p05": 0.3354,
+      "p95": 0.3867
+    }
+  },
+  "full_model_future": {
+    "r2": {
+      "median": 0.6312,
+      "p05": 0.5968,
+      "p95": 0.6568
+    },
+    "rmse": {
+      "median": 2.42,
+      "p05": 2.3204,
+      "p95": 2.542
+    }
+  },
+  "profile_baseline": {
+    "rmse": {
+      "median": 3.2517,
+      "p05": 2.9445,
+      "p95": 3.6579
+    },
+    "fraction_full_model_wins": 1.0,
+    "n_wins": 100,
+    "rmse_reduction_pct": {
+      "median": 25.2258,
+      "p05": 18.7031,
+      "p95": 32.2146
+    }
+  },
+  "random_vs_chronological": {
+    "fraction_random_looks_better": 0.94,
+    "n_random_better": 94,
+    "random_minus_future_r2": {
+      "median": 0.0425,
+      "p05": -0.0025,
+      "p95": 0.0811
+    }
+  },
+  "sgd_vs_ridge": {
+    "sgd_minus_ridge_rmse": {
+      "median": 0.0034,
+      "p05": -0.0128,
+      "p95": 0.0243
+    }
+  },
+  "legacy_reproduction": {
+    "first_harmonic": 0.3595,
+    "plus_second_harmonic": 0.5965,
+    "plus_weekend_interaction": 0.6036
+  },
+  "design": {
+    "days_per_world": 180,
+    "train_frac": 0.8,
+    "seeds": "1000..1099",
+    "sgd_max_iter": 300,
+    "runtime_s": 6.3
+  }
+}

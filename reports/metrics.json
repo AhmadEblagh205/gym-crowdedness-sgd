@@ -1,0 +1,20 @@
+{
+  "full_sgd": {
+    "rmse": 2.4306,
+    "r2": 0.6284
+  },
+  "ridge": {
+    "rmse": 2.4289,
+    "r2": 0.6289
+  },
+  "profile": {
+    "rmse": 3.2095,
+    "r2": 0.3521
+  },
+  "rmse_reduction_vs_profile_pct": 24.27,
+  "n_train": 4896,
+  "n_test": 1224,
+  "train_end": "2024-06-06 22:30:00",
+  "test_start": "2024-06-07 06:00:00",
+  "source": "synthetic known-truth world (seed 0)"
+}
