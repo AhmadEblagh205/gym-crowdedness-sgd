@@ -46,3 +46,22 @@ Because I wrote the generator and the model features from the same mental pictur
 - The random-versus-chronological gap is specific to my drift mechanism and is not a universal correction.
 - The recommendation helper only ranks rows the caller supplies. I have not validated recommendation quality or any effect on user behaviour.
 - There is no production forecasting service.
+
+## Notes moved from the README
+
+Changes made in version 0.3 (my audit of the earlier rebuild):
+
+- Random row splitting is replaced by a chronological holdout: the oldest 80% of rows train and the newest 20% test.
+- Dates are parsed and sorted, duplicate timestamps are rejected and model-facing columns are range-checked.
+- Standardisation sits inside the sklearn pipeline, so scaler parameters come from training rows only.
+- Raw numeric `day_of_week` is replaced by cyclic sine and cosine terms, and I added cyclic month encoding.
+- I kept the first and second hourly Fourier harmonics and added first-harmonic interactions with the weekend and in-semester flags.
+- The global-mean benchmark is replaced by a training-only historical-profile baseline (hour x weekend x semester, falling back to hour x weekend, then hour, then the global training mean).
+- Ridge is fitted on the same feature basis as SGD, to separate feature value from optimiser value.
+- The synthetic generator is now a chronological known-truth process (two daily peaks, weekend and semester effects, weather, noise and mild unmodelled drift). The original generator is kept as `make_synthetic_legacy()`.
+- `recommend_times` ranks complete candidate rows supplied by the caller instead of inventing 24 hours of context from one base row.
+- The test suite grew from 3 to 21 tests.
+
+Legacy result: with the original generator and the original random split I reproduced my earlier claim (`reports/audit_summary.json`, key `legacy_reproduction`). R2 was 0.3595 with the first hourly harmonic, 0.5965 with the second added and 0.6036 with a weekend interaction. It was one seed, one random split and one synthetic world, so it is interpolation evidence and not a forecasting result, and I no longer treat it as a headline.
+
+Interpretation of the 100-world audit: the random split was usually optimistic under the drift I built in, and the size of the gap depends entirely on that drift, so it is not a correction factor for real data. The profile baseline is weaker partly because it cannot use temperature, and partly because the generator has a smooth parametric shape that a Fourier basis fits well, so the margin over the profile is a property of the generator as much as of the method.
